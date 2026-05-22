@@ -51,7 +51,6 @@ public class JFrameKontaktLista extends javax.swing.JFrame {
         lblLista = new javax.swing.JLabel();
         rBtnFörnamnFörst = new javax.swing.JRadioButton();
         rBtnEfternamnFörst = new javax.swing.JRadioButton();
-        btnSpara = new javax.swing.JButton();
         btnHämta = new javax.swing.JButton();
         btnRaderaKontakt = new javax.swing.JButton();
         txfRaderaKontaktId = new javax.swing.JTextField();
@@ -136,13 +135,6 @@ public class JFrameKontaktLista extends javax.swing.JFrame {
             }
         });
 
-        btnSpara.setText("Spara");
-        btnSpara.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSparaActionPerformed(evt);
-            }
-        });
-
         btnHämta.setText("Hämta");
         btnHämta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,18 +185,13 @@ public class JFrameKontaktLista extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblLista)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnSpara)
-                                .addGap(18, 18, 18)
                                 .addComponent(btnHämta)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txfRaderaKontaktId)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnRaderaKontakt)))))
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txfRaderaKontaktId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRaderaKontakt)))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -225,15 +212,13 @@ public class JFrameKontaktLista extends javax.swing.JFrame {
                     .addComponent(lblTelefon)
                     .addComponent(txfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLäggTill))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLista)
-                    .addComponent(btnSpara)
                     .addComponent(btnHämta)
                     .addComponent(btnRaderaKontakt)
-                    .addComponent(txfRaderaKontaktId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfRaderaKontaktId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -267,6 +252,11 @@ public class JFrameKontaktLista extends javax.swing.JFrame {
     }//GEN-LAST:event_txfTelefonActionPerformed
 
     private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
+        /**
+         * Skapar variablar för förnamn, efternamn, telefon.
+         * Lägger sedan till kontakten om man har skrivit in för- och efternamn
+         * Skriver sedan ut kontakterna i listan
+         */
         String förnamn = txfFörnamn.getText();
         String efternamn = txfEfternamn.getText();
         String telefon = txfTelefon.getText();
@@ -280,38 +270,20 @@ public class JFrameKontaktLista extends javax.swing.JFrame {
         else{
             skrivUtEfternamn();
         }
-        //Kontakt kon = new Kontakt(förnamn, efternamn, telefon);
-        //konLista.add(kon);
-        /*if(rBtnFörnamnFörst.isSelected()){
-        txaLista.setText("");
-        for (int i = 0; i < konLista.size(); i++) {
-            txaLista.append((konLista.get(i).getFörnamn()+"\t"+konLista.get(i).getEfternamn()+"\t"+konLista.get(i).getTelefonnummer()+"\n"));
-        }
-        }
-        else{
-         for (int i = 0; i < konLista.size(); i++) {
-            txaLista.append((konLista.get(i).getEfternamn()+"\t"+konLista.get(i).getFörnamn()+"\t"+konLista.get(i).getTelefonnummer()+"\n"));
-        } 
-        }
-        txfFörnamn.setText("");
-        txfEfternamn.setText("");
-        txfTelefon.setText("");
-        */
     }//GEN-LAST:event_btnLäggTillActionPerformed
 
     private void rBtnFörnamnFörstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnFörnamnFörstActionPerformed
-        txaLista.setText("");
+        skrivUtFörnamn();
     }//GEN-LAST:event_rBtnFörnamnFörstActionPerformed
 
     private void rBtnEfternamnFörstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnEfternamnFörstActionPerformed
-        txaLista.setText("");
+        skrivUtEfternamn();
     }//GEN-LAST:event_rBtnEfternamnFörstActionPerformed
 
-    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
-        //Fil.saveToFile(konLista);
-    }//GEN-LAST:event_btnSparaActionPerformed
-
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
+        /**
+         * Hämtar alla kontakter
+         */
         if(rBtnFörnamnFörst.isSelected()){
         txaLista.setText("");
         ResultSet rs = db.getAllData();
@@ -342,6 +314,10 @@ public class JFrameKontaktLista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHämtaActionPerformed
 
     private void btnRaderaKontaktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaderaKontaktActionPerformed
+        /**
+         * Raderar kontak.
+         * Kollar vilken kontakt man vill ta bort och raderar sedan den och skriver ut listan igen.
+         */
         try{
             String raderaKontaktId = txfRaderaKontaktId.getText();
             if(!raderaKontaktId.isBlank()){
@@ -359,7 +335,9 @@ public class JFrameKontaktLista extends javax.swing.JFrame {
          }
         
     }//GEN-LAST:event_btnRaderaKontaktActionPerformed
-
+    /**
+     * Skriver ut listan. Hämtar först alla kontakter i listan och skriver sen ut dom i ordningen man valt
+     */
     private void skrivUtFörnamn(){
         this.txaLista.setText("");
         ResultSet rs = db.getAllData();
@@ -427,7 +405,6 @@ public class JFrameKontaktLista extends javax.swing.JFrame {
     private javax.swing.JButton btnHämta;
     private javax.swing.JButton btnLäggTill;
     private javax.swing.JButton btnRaderaKontakt;
-    private javax.swing.JButton btnSpara;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField förnamn1;
     private javax.swing.JTextField förnamn2;
